@@ -1,0 +1,76 @@
+// Keys //
+// As a matter of courtesy to Vim
+define_key(caret_keymap, "j", "caret-forward-line");
+define_key(caret_keymap, "k", "caret-backward-line");
+define_key(caret_keymap, "h", "caret-backward-char");
+define_key(caret_keymap, "l", "caret-forward-char");
+define_key(content_buffer_normal_keymap, "/", "isearch-forward");
+define_key(content_buffer_normal_keymap, "?", "isearch-backward");
+define_key(content_buffer_normal_keymap, "n", "isearch-continue-forward");
+define_key(content_buffer_normal_keymap, "N", "isearch-continue-backward");
+define_key(content_buffer_normal_keymap, "C-o", 'back');
+define_key(content_buffer_normal_keymap, "C-i", 'forward');
+define_key(content_buffer_normal_keymap, "b", "switch-to-buffer");
+define_key(content_buffer_normal_keymap, "B", "list-bookmarks");
+define_key(content_buffer_normal_keymap, "g", "cmd_scrollTop");
+define_key(content_buffer_normal_keymap, "G", "cmd_scrollBottom");
+//define_key(content_buffer_normal_keymap, ":", "execute-extended-command");
+//define_key(content_buffer_text_keymap, "C-c", "cmd_copy");
+define_key(content_buffer_normal_keymap, "C-c", "cmd_copy");
+define_key(content_buffer_normal_keymap, "C-subtract", "zoom-out-text");
+define_key(content_buffer_normal_keymap, "C-add", "zoom-in-text");
+
+
+define_key(content_buffer_normal_keymap, "d", "kill-current-buffer");
+
+// Keybindings
+var maps = Array(
+    // Vimperator-like
+    "j" , "cmd_scrollLineDown",
+    "k" , "cmd_scrollLineUp",
+    "h" , "cmd_scrollLeft",
+    "l" , "cmd_scrollRight",
+    "o" , "find-url",
+    "F" , "follow-new-buffer",
+    "t" , "find-url-new-buffer",
+    "g t" , "buffer-next",
+    "g T" , "buffer-previous",
+    "d" , "kill-current-buffer",
+    'y' , "copy",
+    // Eye guide
+    "space", "eye-guide-scroll-down",
+    "back_space", "eye-guide-scroll-up",
+    // Vimperator-like eye guide :D
+    "C-f" , "cmd_scrollPageDown",
+    "C-b" , "cmd_scrollPageUp"
+);
+
+for (var i = 0; i < maps.length; i += 2)
+    define_key(content_buffer_normal_keymap, maps[i], maps[i+1]);
+
+// don't show clock
+remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+
+// show buffer count in modeline
+add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
+
+// show loading buffer count widget
+add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
+
+// disable scrollbars
+function disable_scrollbars (buffer) {
+    buffer.top_frame.scrollbars.visible = false;
+}
+add_hook("create_buffer_late_hook", disable_scrollbars);
+
+// display the url before going to it in hints mode
+hints_display_url_panel = false;
+
+// Mode-line
+mode_line_mode(true);
+
+// auto completion in the minibuffer
+minibuffer_auto_complete_default = true;
+url_completion_use_history = true; // should work since bf05c87405
+url_completion_use_bookmarks = true;
+
