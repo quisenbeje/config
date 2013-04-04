@@ -1,3 +1,25 @@
+// webjumps
+define_webjump("gmail", "https://mail.google.com/mail/u/0/"); //primary account
+define_webjump("gplus", "https://plus.google.com/u/0/");
+define_webjump("adhoc", "https://plus.google.com/u/0/b/100249597703155313450/100249597703155313450/posts");
+define_webjump("gcal", "https://www.google.com/calendar/render?hl=en&safe=on");
+define_webjump("gimages", "http://www.google.com/images?q=%s", $alternative = "http://www.google.com/imghp");
+define_webjump("gdrive", "https://drive.google.com/?tab=no&authuser=0#my-drive");
+define_webjump("gvoice", "https://www.google.com/voice?pli=1#inbox");
+define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
+define_webjump("news", "http://news.google.com/news/search?q=%s");
+define_webjump("stackoverflow","http://stackoverflow.com/search?q=%s", $alternative="http://stackoverflow.com");
+define_webjump("bashfaq",
+    "http://mywiki.wooledge.org/BashFAQ?action=fullsearch&context=180&value=%s&fullsearch=Text",
+    $alternative = "http://mywiki.wooledge.org/BashFAQ");
+require("page-modes/wikipedia.js");
+wikipedia_webjumps_format = "wp-%s"; // controls the names of the webjumps.  default is "wikipedia-%s".
+define_wikipedia_webjumps("en", "de", "fr"); // For English, German and French.
+// define_wikipedia_webjumps(); // To make use of ALL of the webjumps (200+).
+define_webjump("amazon", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s&mode=blended");
+define_webjump("github", "http://github.com/search?q=%s&type=Everything");
+define_webjump("wunderground", "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=%s");
+
 // Keys //
 // As a matter of courtesy to Vim
 define_key(caret_keymap, "j", "caret-forward-line");
@@ -14,39 +36,26 @@ define_key(content_buffer_normal_keymap, "b", "switch-to-buffer");
 define_key(content_buffer_normal_keymap, "B", "list-bookmarks");
 define_key(content_buffer_normal_keymap, "g", "cmd_scrollTop");
 define_key(content_buffer_normal_keymap, "G", "cmd_scrollBottom");
-//define_key(content_buffer_normal_keymap, ":", "execute-extended-command");
+define_key(content_buffer_normal_keymap, ":", "execute-extended-command");
 //define_key(content_buffer_text_keymap, "C-c", "cmd_copy");
 define_key(content_buffer_normal_keymap, "C-c", "cmd_copy");
 define_key(content_buffer_normal_keymap, "C-subtract", "zoom-out-text");
 define_key(content_buffer_normal_keymap, "C-add", "zoom-in-text");
-
-
 define_key(content_buffer_normal_keymap, "d", "kill-current-buffer");
+define_key(content_buffer_normal_keymap, "C-d", "kill-current-buffer");
 
-// Keybindings
-var maps = Array(
-    // Vimperator-like
-    "j" , "cmd_scrollLineDown",
-    "k" , "cmd_scrollLineUp",
-    "h" , "cmd_scrollLeft",
-    "l" , "cmd_scrollRight",
-    "o" , "find-url",
-    "F" , "follow-new-buffer",
-    "t" , "find-url-new-buffer",
-    "g t" , "buffer-next",
-    "g T" , "buffer-previous",
-    "d" , "kill-current-buffer",
-    'y' , "copy",
-    // Eye guide
-    "space", "eye-guide-scroll-down",
-    "back_space", "eye-guide-scroll-up",
-    // Vimperator-like eye guide :D
-    "C-f" , "cmd_scrollPageDown",
-    "C-b" , "cmd_scrollPageUp"
-);
+define_key(content_buffer_normal_keymap, "j", "cmd_scrollLineDown");
+define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp");
+define_key(content_buffer_normal_keymap, "h", "cmd_scrollLeft");
+define_key(content_buffer_normal_keymap, "l", "cmd_scrollRight");
+define_key(content_buffer_normal_keymap, "o", "find-url");
+define_key(content_buffer_normal_keymap, "F", "follow-new-buffer");
+define_key(content_buffer_normal_keymap, "C-h", "buffer-next");
+define_key(content_buffer_normal_keymap, "C-l", "buffer-previous");
+define_key(content_buffer_normal_keymap, "y", "copy");
+define_key(content_buffer_normal_keymap, "C-f", "cmd_scrollPageDown");
+define_key(content_buffer_normal_keymap, "C-b", "cmd_scrollPageUp");
 
-for (var i = 0; i < maps.length; i += 2)
-    define_key(content_buffer_normal_keymap, maps[i], maps[i+1]);
 
 // don't show clock
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
