@@ -1,3 +1,30 @@
+register_user_stylesheet(
+    "data:text/css,"+
+        escape(
+            "#minibuffer, .mode-line { font-size: 16px;}\n"+
+            "#minibuffer-prompt { color: red; }" +
+            "span.__conkeror_hint { border: 1px solid #66d9ef !important;" +
+                " color: white !important;" +
+                " background-color: #ae81ff !important;" +
+                )
+);
+
+// load download buffers in the background in the current window, instead of in new windows.
+download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
+
+require("favicon");
+
+// To enable favicons in the mode-line:
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+
+// To enable favicons in the read_buffer completions list:
+read_buffer_show_icons = true; 
+
+/* eye-guide */
+require('eye-guide.js');
+define_key(content_buffer_normal_keymap, "C-f", "eye-guide-scroll-down");
+define_key(content_buffer_normal_keymap, "C-b", "eye-guide-scroll-up");
+
 /* window */
 can_kill_last_buffer = false; // Don't let kill-buffer close the window
 
@@ -7,9 +34,9 @@ hints_auto_exit_delay = 100;
 hints_ambiguous_auto_exit_delay = 2500;
 
 // colors
-hint_background_color = "cyan"
+hint_background_color = "#66d9ef"
+active_hint_background_color = "#fd971f"
 img_hint_background_color = "cyan"
-active_hint_background_color = "#2f4f4f"
 active_img_hint_background_color = "#2f4f4f"
 
 // display properties of the current selected node during the hints interaction.
@@ -29,10 +56,17 @@ register_user_stylesheet(
     "data:text/css," +
         escape (
             "span.__conkeror_hint {" +
-            " border: 1px solid #dddddd !important;" +
+            " border: 1px solid #66d9ef !important;" +
             " color: white !important;" +
-            " background-color: black !important;" +
+            " background-color: #ae81ff !important;" +
 "}"));
+
+select {
+border: 1px inset gray;
+background-color: white;
+color: i#fd971f;
+-moz-appearance: none !important;
+}
 
 /* isearch */
 isearch_keep_selection = true; // keep the found item selected after search mode ends
@@ -64,8 +98,8 @@ interactive("find-url-from-history-new-buffer",
         "find-url-new-buffer",
         $browser_object = browser_object_history_url);
 
-define_key(content_buffer_normal_keymap, "h", "find-url-from-history-new-buffer");
-define_key(content_buffer_normal_keymap, "H", "find-url-from-history");
+define_key(content_buffer_normal_keymap, "H", "find-url-from-history-new-buffer");
+define_key(content_buffer_normal_keymap, "C-H", "find-url-from-history");
 
 // possibly valid URL
 function possibly_valid_url (str) {
@@ -140,8 +174,8 @@ define_key(content_buffer_normal_keymap, "F", "follow-new-buffer");
 define_key(content_buffer_normal_keymap, "C-h", "buffer-next");
 define_key(content_buffer_normal_keymap, "C-l", "buffer-previous");
 define_key(content_buffer_normal_keymap, "y", "copy");
-define_key(content_buffer_normal_keymap, "C-f", "cmd_scrollPageDown");
-define_key(content_buffer_normal_keymap, "C-b", "cmd_scrollPageUp");
+//define_key(content_buffer_normal_keymap, "C-f", "cmd_scrollPageDown");
+//define_key(content_buffer_normal_keymap, "C-b", "cmd_scrollPageUp");
 
 
 // don't show clock
