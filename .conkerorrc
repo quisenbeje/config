@@ -1,4 +1,89 @@
+/* window */
+can_kill_last_buffer = false; // Don't let kill-buffer close the window
+
+/* hint */
+// save a keystroke when selecting a dom node by number.
+hints_auto_exit_delay = 100;
+hints_ambiguous_auto_exit_delay = 2500;
+
+// colors
+hint_background_color = "cyan"
+img_hint_background_color = "cyan"
+active_hint_background_color = "#2f4f4f"
+active_img_hint_background_color = "#2f4f4f"
+
+// display properties of the current selected node during the hints interaction.
+hints_display_url_panel = true;
+
+// big hint number
+register_user_stylesheet(
+    "data:text/css," +
+        escape(
+            "span.__conkeror_hint {" +
+            " font-size: 10px !important;" +
+            " line-height: 12px !important;" +
+"}"));
+
+// hint's color
+register_user_stylesheet(
+    "data:text/css," +
+        escape (
+            "span.__conkeror_hint {" +
+            " border: 1px solid #dddddd !important;" +
+            " color: white !important;" +
+            " background-color: black !important;" +
+"}"));
+
+/* isearch */
+isearch_keep_selection = true; // keep the found item selected after search mode ends
+
+// zoom
+function my_zoom_set (buffer) {
+    browser_zoom_set(buffer, false, 80);
+}
+add_hook('create_buffer_late_hook', my_zoom_set);
+zoom_levels = [ 60, 70, 75, 80, 85, 90, 100, 110,
+                120, 125, 130, 140, 150, 200, 300, 500, 1000, 2000 ];
+// history webjump
+define_browser_object_class(
+    "history-url", null, 
+    function (I, prompt) {
+        check_buffer (I.buffer, content_buffer);
+        var result = yield I.buffer.window.minibuffer.read_url(
+        $prompt = prompt,  $use_webjumps = false, $use_history = true, $use_bookmarks = false);
+        yield co_return (result);
+});
+
+interactive("find-url-from-history",
+        "Find a page from history in the current buffer",
+        "find-url",
+        $browser_object = browser_object_history_url);
+
+interactive("find-url-from-history-new-buffer",
+        "Find a page from history in the current buffer",
+        "find-url-new-buffer",
+        $browser_object = browser_object_history_url);
+
+define_key(content_buffer_normal_keymap, "h", "find-url-from-history-new-buffer");
+define_key(content_buffer_normal_keymap, "H", "find-url-from-history");
+
+// possibly valid URL
+function possibly_valid_url (str) {
+    return (/[\.\/:]/.test(str)) &&
+            !(/\S\s+\S/.test(str)) &&
+            !(/^\s*$/.test(str));
+}
+
+// load session module
+require("session.js");
+session_auto_save_auto_load = true; // auto-load session
+
+// don't open download buffer automatically
+remove_hook("download_added_hook", open_download_buffer_automatically);
+
 // webjumps
+// set default webjump
+read_url_handler_list = [read_url_make_default_webjump_handler("google")];
 define_webjump("gmail", "https://mail.google.com/mail/u/0/"); //primary account
 define_webjump("gplus", "https://plus.google.com/u/0/");
 define_webjump("adhoc", "https://plus.google.com/u/0/b/100249597703155313450/100249597703155313450/posts");
@@ -39,6 +124,7 @@ define_key(content_buffer_normal_keymap, "G", "cmd_scrollBottom");
 define_key(content_buffer_normal_keymap, ":", "execute-extended-command");
 //define_key(content_buffer_text_keymap, "C-c", "cmd_copy");
 define_key(content_buffer_normal_keymap, "C-c", "cmd_copy");
+define_key(content_buffer_normal_keymap, "C-C", "copy-current-url");
 define_key(content_buffer_normal_keymap, "C-subtract", "zoom-out-text");
 define_key(content_buffer_normal_keymap, "C-add", "zoom-in-text");
 define_key(content_buffer_normal_keymap, "d", "kill-current-buffer");
@@ -49,6 +135,7 @@ define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp");
 define_key(content_buffer_normal_keymap, "h", "cmd_scrollLeft");
 define_key(content_buffer_normal_keymap, "l", "cmd_scrollRight");
 define_key(content_buffer_normal_keymap, "o", "find-url");
+define_key(content_buffer_normal_keymap, "t", "find-url-new-buffer");
 define_key(content_buffer_normal_keymap, "F", "follow-new-buffer");
 define_key(content_buffer_normal_keymap, "C-h", "buffer-next");
 define_key(content_buffer_normal_keymap, "C-l", "buffer-previous");
@@ -67,10 +154,10 @@ add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
 
 // disable scrollbars
-function disable_scrollbars (buffer) {
-    buffer.top_frame.scrollbars.visible = false;
-}
-add_hook("create_buffer_late_hook", disable_scrollbars);
+//function disable_scrollbars (buffer) {
+//    buffer.top_frame.scrollbars.visible = false;
+//}
+//add_hook("create_buffer_late_hook", disable_scrollbars);
 
 // display the url before going to it in hints mode
 hints_display_url_panel = false;
