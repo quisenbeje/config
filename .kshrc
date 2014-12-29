@@ -1,5 +1,5 @@
 
-export PATH=${PATH}:$HOME/bin:/opt/rational/clearcase/bin:/opt/rational/clearcase/etc:/usr/sbin:/usr/bin:/usr/local/bin:/opt/rational/clearquest/bin:.
+export PATH=${PATH}:$HOME/local/bin:$HOME/bin:/opt/rational/clearcase/bin:/opt/rational/clearcase/etc:/usr/sbin:/usr/bin:/usr/local/bin:/opt/rational/clearquest/bin:.
 PATH=$PATH:"/home/jquis/todotxt"
 export TODOTXT_DEFAULT_ACTION=ls
 export LC_ALL=en_US.utf8
@@ -18,6 +18,7 @@ export PS1='
 #settings
 set -o vi
 echo ".kshrc $0"
+export EDITOR=vim
 
 # Aliases
 if [ -n "$KSH_VERSION" ]
@@ -59,12 +60,12 @@ alias mt=multitool
 alias vxman='man -M /opt/windriver/vxworks-cert-6.6.3/man'
 alias wb=/opt/windriver/startWorkbench.sh
 alias sc='cd /home/eekbe/SC_PROJECT/source'
-alias resetsc1='/home/eekbe/resetsc.exp 1'
-alias resetsc2='/home/eekbe/resetsc.exp 2'
-alias resetsc3='/home/eekbe/resetsc.exp 3'
-alias resetsc4='/home/eekbe/resetsc.exp 4'
-alias resetsc5='/home/eekbe/resetsc.exp 5'
-alias resetsc='/home/eekbe/resetsc.exp'
+alias resetsc1='/home/eekbe/scripts/resetsc.exp 1'
+alias resetsc2='/home/eekbe/scripts/resetsc.exp 2'
+alias resetsc3='/home/eekbe/scripts/resetsc.exp 3'
+alias resetsc4='/home/eekbe/scripts/resetsc.exp 4'
+alias resetsc5='/home/eekbe/scripts/resetsc.exp 5'
+alias resetsc='/home/eekbe/scripts/resetsc.exp'
 alias poweroffsc='/home/eekbe/poweroffsc.exp'
 alias poweronsc='/home/eekbe/poweronsc.exp'
 
@@ -106,7 +107,7 @@ alias rm='rm -I'
 alias mv='mv -i'
 alias t='todo.sh -d /home/jquis/todotxt/todo.cfg'
 alias rngr='/home/jquis/ranger/ranger-1.6.1/ranger.py'
-alias tmux='/home/jquis/local/bin/tmux-1.9a'
+#alias tmux='/home/jquis/local/bin/tmux-1.9a'
 alias objdumpppc='/opt/windriver/gnu/4.1.2-vxworks-6.6/x86-linux2/bin/objdumpppc'
 #source todo_completion
 #source /home/jquis/todotxt/todo_completion
@@ -115,11 +116,33 @@ alias objdumpppc='/opt/windriver/gnu/4.1.2-vxworks-6.6/x86-linux2/bin/objdumpppc
 #complete -F _todo t
 make()
 {
-	pathpat="(/[^/]*)+:[0-9]+"
-	ccred=$(echo -e "\033[0;31m")
-	ccyellow=$(echo -e "\033[0;33m")
-	ccend=$(echo -e "\033[0m")
-	/usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+	#pathpat="(/[^/]*)+:[0-9]+"
+	#pathpat="(/[^/]*)+:[0-9]+"
+	#ccred=$(echo -e "\033[0;31m")
+	#ccyellow=$(echo -e "\033[0;33m")
+	C_ERR=`echo -e "\033[38;5;124m"`
+	C_WRN=`echo -e "\033[38;5;227m"`
+	#C_SRC=`echo -e "\033[38;5;46m"`
+	C_SRC=`echo -e "\033[38;5;118m"`
+	#C_OBJ=`echo -e "\033[38;5;39m"`
+	C_OBJ=`echo -e "\033[38;5;51m"`
+	C_LIN=`echo -e "\033[38;5;99m"`
+	C_HEX=`echo -e "\033[38;5;99m"`
+	C_NON=`echo -e "\033[0m"`
+	P_ERR="[Ee]rror.*:.*$"
+	P_WRN="[Ww]arning.*:.*$"
+	P_SRC="\b[_a-zA-Z0-9/-]*\.c\b"
+	P_OBJ="\b[_a-zA-Z0-9/-]*\.o\b"
+	P_LIN="line.*[0-9]*"
+	P_HEX="(0x)?[0-9a-fA-F]{8}"
+	#/usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+	/usr/bin/make "$@" 2>&1 | sed -E \
+		-e "s/${P_SRC}/${C_SRC}&${C_NON}/g" \
+		-e "s/${P_OBJ}/${C_OBJ}&${C_NON}/g" \
+		-e "s/${P_LIN}/${C_LIN}&${C_NON}/" \
+		-e "s/${P_ERR}/${C_ERR}&${C_NON}/" \
+		-e "s/${P_WRN}/${C_WRN}&${C_NON}/" \
+		-e "s/${P_HEX}/${C_HEX}&${C_NON}/g"
 	return ${PIPESTATUS[0]}
 }
 
