@@ -33,129 +33,128 @@ set nocompatible " must be first line
 	color molokai_jeq                                   " load a colorscheme
 	                                                    " colorscheme Benokai
 	let term=$TERM
-    set encoding=utf-8
+	set encoding=utf-8
 	set termencoding=utf-8
-    scriptencoding utf-8
+	scriptencoding utf-8
 	set ruler                                           " show the ruler
 	set showcmd                                         " show partial commands in status line and  selected characters/lines in visual mode
-    set showmode                                        " display the current mode
+	set showmode                                        " display the current mode
 	set laststatus=2
 
 	set nu
-    set mouse=a                                         " automatically enable mouse usage
-    set shortmess+=filmnrxoOtT                          " abbrev. of messages (avoids 'hit enter')
-    set viewoptions=folds,options,cursor,unix,slash     " better unix / windows compatibility
-    "set virtualedit=onemore                            " allow for cursor beyond last character
-    set history=100                                     " Store a ton of history (default is 20)
-    set lazyredraw                                      " don't redraw while executing macros (good performance)
-
-    set showmatch                                       " show matching brackets/parenthesis
-    syn match Braces display '[{}()\[\]]'
-    hi MatchParen cterm=none ctermbg=green ctermfg=blue
+	set mouse=a                                         " automatically enable mouse usage
+	set shortmess+=filmnrxoOtT                          " abbrev. of messages (avoids 'hit enter')
+	set viewoptions=folds,options,cursor,unix,slash     " better unix / windows compatibility
+	"set virtualedit=onemore                            " allow for cursor beyond last character
+	set history=100                                     " Store a ton of history (default is 20)
+	set lazyredraw                                      " don't redraw while executing macros (good performance)
+	set showmatch                                       " show matching brackets/parenthesis
+	syn match Braces display '[{}()\[\]]'
+	hi MatchParen cterm=none ctermbg=green ctermfg=blue
 
 
 	set backspace=indent,eol,start                      " backspace for dummys
-    set linespace=0                                     " No extra spaces between rows
+	set linespace=0                                     " No extra spaces between rows
 	set undolevels=20                                   " maximum number of changes that can be undone
 
 "    set mat=2                                          " how many tenths of a second to blink when matching brackets
-    set incsearch                                       " find as you type search
-    "set hlsearch                                       " highlight search terms
-    set winminheight=0                                  " windows can be 0 line high
-    set ignorecase                                      " case insensitive search
-    set smartcase                                       " case sensitive when uc present
-    set wildmenu                                        " show list instead of just completing
-    set wildmode=list:longest,full                      " command <Tab> completion, list matches, then longest common part, then all.
+	set incsearch                                       " find as you type search
+	"set hlsearch                                       " highlight search terms
+	set winminheight=0                                  " windows can be 0 line high
+	set ignorecase                                      " case insensitive search
+	set smartcase                                       " case sensitive when uc present
+	set wildmenu                                        " show list instead of just completing
+	set wildmode=list:longest,full                      " command <Tab> completion, list matches, then longest common part, then all.
 	set whichwrap=b,s,h,l,<,>,[,]                       " backspace and cursor keys wrap to
-    set scrolljump=5                                    " lines to scroll when cursor leaves screen
-    set scrolloff=3                                     " minimum lines to keep above and below cursor
-    set foldenable                                      " auto fold code
-    "set gdefault                                       " the /g flag on :s substitutions by default
+	set scrolljump=5                                    " lines to scroll when cursor leaves screen
+	set scrolloff=3                                     " minimum lines to keep above and below cursor
+	set foldenable                                      " auto fold code
+	"set gdefault                                       " the /g flag on :s substitutions by default
 
-    " view whitespace
-    highlight NonText guifg=#4a4a59 " color list tab
-    highlight SpecialKey guifg=#4a4a59 " color list eol
+	" view whitespace
+	highlight NonText guifg=#4a4a59 " color list tab
+	highlight SpecialKey guifg=#4a4a59 " color list eol
 
-    autocmd FileType * setlocal formatoptions-=ro " turn off auto comment feature
-    
-    set hidden
-    set ttyfast
-    "set visualbell
-    set noerrorbells
-    set novisualbell
-    set t_vb=
-    set tm=500
+	autocmd FileType * setlocal formatoptions-=ro " turn off auto comment feature
+
+	set hidden
+	set ttyfast
+	"set visualbell
+	set noerrorbells
+	set novisualbell
+	set t_vb=
+	set tm=500
 	set timeout timeoutlen=1000 ttimeoutlen=10
 " }
 
 " Formatting {
-    set wrap                         " wrap long lines
-    set textwidth=79
-    set formatoptions=qrn1
-    set autoindent                   " indent at the same level of the previous line
-    set smartindent
-    set shiftwidth=4                 " use indents of 4 spaces
-    "set expandtab                   " tabs are spaces, not tabs
-    set tabstop=4                    " an indentation every four columns
-    set softtabstop=4                " let backspace delete indent
-    "set matchpairs+=<:>             " match, to be used with %
-    set comments=sl:/*,mb:*,elx:*/   " auto format comment blocks
+	set wrap                         " wrap long lines
+	set textwidth=79
+	set formatoptions=qrn1
+	set autoindent                   " indent at the same level of the previous line
+	set smartindent
+	set shiftwidth=4                 " use indents of 4 spaces
+	"set expandtab                   " tabs are spaces, not tabs
+	set tabstop=4                    " an indentation every four columns
+	set softtabstop=4                " let backspace delete indent
+	"set matchpairs+=<:>             " match, to be used with %
+	set comments=sl:/*,mb:*,elx:*/   " auto format comment blocks
 	set backup                       " backups are nice ...
 	set backupdir=$HOME/.vimbackup// " but not when they clog .
 	set directory=$HOME/.vimswap//   " Same for swap files
 	set viewdir=$HOME/.vimviews//    " same for view files
-    " Remove trailing whitespaces and ^M chars
-    "autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-    "autocmd FileType qf wincmd J
+	" Remove trailing whitespaces and ^M chars
+	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+	"autocmd FileType qf wincmd J
 " }
 
 " Key (re)Mappings {
-  nnoremap <F2> :set invpaste paste?<CR>
-  set pastetoggle=<F2>
-  "nnoremap <F8> :setl noai nocin nosi inde=<CR>
+	nnoremap <F2> :set invpaste paste?<CR>
+	set pastetoggle=<F2>
+	"nnoremap <F8> :setl noai nocin nosi inde=<CR>
 
-  " change leader from defaut ('\') to ','
-  let mapleader = ','
+	" change leader from defaut ('\') to ','
+	let mapleader = ','
 
-  " change CWD to directory of current file
-  "nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-  nnoremap <leader>cd :cd <C-R>=expand("%:p:h") . "/" <CR>
-  cnoremap .. <esc>:cd ..<CR>:cd <C-R>=expand("`pwd`")<CR>
+	" change CWD to directory of current file
+	"nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+	nnoremap <leader>cd :cd <C-R>=expand("%:p:h") . "/" <CR>
+	cnoremap .. <esc>:cd ..<CR>:cd <C-R>=expand("`pwd`")<CR>
 
-  " buffer manipulation
-  "nmap <silent> <leader>bd :bp<bar>bd#<CR>  " delete buffer without closing window
-  nmap <silent> <leader>bd :bn<CR>:bd#<CR>
-  nmap <silent> <leader>bb :b#<CR>
-  nmap <silent> <leader>bn :bn<CR>
-  nmap <silent> <leader>bp :bp<CR>
-  nmap <silent> <leader>bh :hide<CR>
-  nmap <silent> <leader>bo :only<CR>
-  nnoremap <silent> <leader>bv :vsp#<CR><C-w>R<C-w>w
-  nnoremap <silent> <leader>bc :vsp%<CR><C-w>R<C-w>w
-  nmap <silent> <leader>br <C-w>R
-  
-  " window manipulation
-  nmap <leader>wh <C-w>H
-  nmap <leader>wj <C-w>J
-  nmap <leader>wk <C-w>K
-  nmap <leader>wl <C-w>L
-  nmap <leader>wo <C-w>o
-  nmap <leader>ws <C-w>s
-  nmap <leader>wv <C-w>v
-  nmap <leader>wc <C-w>c
-  nmap <leader>wr <C-w>R
-  nmap <leader>wt <C-w>T
-  nmap <leader>ww <C-w>|
-  nmap <leader>we <C-w>=
+	" buffer manipulation
+	"nmap <silent> <leader>bd :bp<bar>bd#<CR>  " delete buffer without closing window
+	nmap <silent> <leader>bd :bn<CR>:bd#<CR>
+	nmap <silent> <leader>bb :b#<CR>
+	nmap <silent> <leader>bn :bn<CR>
+	nmap <silent> <leader>bp :bp<CR>
+	nmap <silent> <leader>bh :hide<CR>
+	nmap <silent> <leader>bo :only<CR>
+	nnoremap <silent> <leader>bv :vsp#<CR><C-w>R<C-w>w
+	nnoremap <silent> <leader>bc :vsp%<CR><C-w>R<C-w>w
+	nmap <silent> <leader>br <C-w>R
 
-  " quickfix open/close
-  nmap <silent> <leader>qo :copen<CR><C-w>J
-  nmap <silent> <leader>qc :cclose<CR>
-  nmap <silent> <leader>qq :cexpr[]<CR>
-  nmap <silent> [q :cprevious<CR>zz
-  nmap <silent> ]q :cnext<CR>zz
-  nmap <silent> [Q :cfirst<CR>
-  nmap <silent> ]Q :clast<CR>
+	" window manipulation
+	nmap <leader>wh <C-w>H
+	nmap <leader>wj <C-w>J
+	nmap <leader>wk <C-w>K
+	nmap <leader>wl <C-w>L
+	nmap <leader>wo <C-w>o
+	nmap <leader>ws <C-w>s
+	nmap <leader>wv <C-w>v
+	nmap <leader>wc <C-w>c
+	nmap <leader>wr <C-w>R
+	nmap <leader>wt <C-w>T
+	nmap <leader>ww <C-w>|
+	nmap <leader>we <C-w>=
+
+	" quickfix open/close
+	nmap <silent> <leader>qo :copen<CR><C-w>J
+	nmap <silent> <leader>qc :cclose<CR>
+	nmap <silent> <leader>qq :cexpr[]<CR>
+	nmap <silent> [q :cprevious<CR>zz
+	nmap <silent> ]q :cnext<CR>zz
+	nmap <silent> [Q :cfirst<CR>
+	nmap <silent> ]Q :clast<CR>
 	autocmd! QuickfixCmdPost * call SortQuickfix('QfStrCmp')
 	function! SortQuickfix(fn)
 		call setqflist(sort(getqflist(), a:fn))
@@ -165,107 +164,107 @@ set nocompatible " must be first line
 		return t1 <# t2 ? -1 : t1 ==# t2 ? 0 : 1
 	endfunction
 
-  " location open/close
-  nmap <silent> <leader>lo :lopen<CR><C-w>J
-  nmap <silent> <leader>lc :lclose<CR>
-  nmap <silent> [l :lprevious<CR>zz
-  nmap <silent> ]l :lnext<CR>zz
-  nmap <silent> [L :lfirst<CR>
-  nmap <silent> ]L :llast<CR>
+	" location open/close
+	nmap <silent> <leader>lo :lopen<CR><C-w>J
+	nmap <silent> <leader>lc :lclose<CR>
+	nmap <silent> [l :lprevious<CR>zz
+	nmap <silent> ]l :lnext<CR>zz
+	nmap <silent> [L :lfirst<CR>
+	nmap <silent> ]L :llast<CR>
 
-  " allow deleting selection without updating the clipboard (yank buffer)
-  nnoremap x "_x
-  nnoremap X "_X
-  vnoremap x "_x
-  vnoremap X "_X
-  
-  " in visual mode paste from the yank only register (0)
-  vnoremap p "0p
-  "vnoremap p "_dP
+	" allow deleting selection without updating the clipboard (yank buffer)
+	nnoremap x "_x
+	nnoremap X "_X
+	vnoremap x "_x
+	vnoremap X "_X
 
-  " exit insert mode and move up/down
-  inoremap jj <esc>j
-  inoremap kk <esc>k
+	" in visual mode paste from the yank only register (0)
+	vnoremap p "0p
+	"vnoremap p "_dP
 
-  " line shifting
-  "nnoremap <CR> i<CR><Esc>^
-  "nnoremap <leader><CR> A<CR><Esc>^
-  nnoremap <leader><CR> i<CR><Esc>^
-  nnoremap <leader>o m`o<Esc>``
-  nnoremap <leader>O m`O<Esc>``
+	" exit insert mode and move up/down
+	inoremap jj <esc>j
+	inoremap kk <esc>k
 
-  " search and replace word under cursor
-  nnoremap <leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-  
-  " done by vim-tmux-navigator plugin
-  " Easier moving in tabs and windows
-  "map <C-j> <C-w>j
-  "map <C-k> <C-w>k
-  "map <C-l> <C-w>l
-  "map <C-h> <C-w>h
+	" line shifting
+	"nnoremap <CR> i<CR><Esc>^
+	"nnoremap <leader><CR> A<CR><Esc>^
+	nnoremap <leader><CR> i<CR><Esc>^
+	nnoremap <leader>o m`o<Esc>``
+	nnoremap <leader>O m`O<Esc>``
 
-  " Wrapped lines goes down/up to next row, rather than next line in file.
-  nnoremap j gj
-  nnoremap k gk
-  
-  " deactivate arrow keys
-  nnoremap <up>     <nop>
-  nnoremap <down>   <nop>
-  nnoremap <left>   <nop>
-  nnoremap <right>  <nop>
-  inoremap <up>     <nop>
-  inoremap <down>   <nop>
-  inoremap <left>   <nop>
-  inoremap <right>  <nop>
+	" search and replace word under cursor
+	nnoremap <leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
-  " visual shifting (does not exit Visual mode)
-  vnoremap < <gv
-  vnoremap > >gv
+	" done by vim-tmux-navigator plugin
+	" Easier moving in tabs and windows
+	"map <C-j> <C-w>j
+	"map <C-k> <C-w>k
+	"map <C-l> <C-w>l
+	"map <C-h> <C-w>h
 
-  " search related maps
-  nnoremap / /\v
-  vnoremap / /\v
-  nnoremap <leader><space> :noh<cr>
-  nmap n nzz
-  nmap N Nzz
+	" Wrapped lines goes down/up to next row, rather than next line in file.
+	nnoremap j gj
+	nnoremap k gk
 
-  " tab is connected to C-i; so it over-rides default C-i 
-  "nnoremap <tab>  " tab is connected to C-i; so it over-rides default C-i%
-  "vnoremap <tab> %
-  nnoremap <leader>V V`]
+	" deactivate arrow keys
+	nnoremap <up>     <nop>
+	nnoremap <down>   <nop>
+	nnoremap <left>   <nop>
+	nnoremap <right>  <nop>
+	inoremap <up>     <nop>
+	inoremap <down>   <nop>
+	inoremap <left>   <nop>
+	inoremap <right>  <nop>
 
-  " quickly edit common files
-  "nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-  nnoremap <leader>ev <C-w><C-v><C-l>:e $HOME/.vimrc<cr>
-  nnoremap <leader>et <C-w><C-v><C-l>:e $HOME/.vim/.vim_tips<cr>
+	" visual shifting (does not exit Visual mode)
+	vnoremap < <gv
+	vnoremap > >gv
 
-  " quick c comments
-  inoremap <Leader><Leader>c           /**/<Left><Left>
-  inoremap <Leader><Leader>c<Space>    /*<Space><Space>*/<Left><Left><Left>
-  inoremap <Leader><Leader>c<CR>       /*<CR>*/<Esc>O
-  nnoremap <Leader><Leader>cO           O/**/<Left><Left>
-  nnoremap <Leader><Leader>cO<Space>    O/*<Space><Space>*/<Left><Left><Left>
-  nnoremap <Leader><Leader>cA           A<tab>/**/<Left><Left>
-  nnoremap <Leader><Leader>cA<Space>    A<tab>/*<Space><Space>*/<Left><Left><Left>
+	" search related maps
+	nnoremap / /\v
+	vnoremap / /\v
+	nnoremap <leader><space> :noh<cr>
+	nmap n nzz
+	nmap N Nzz
 
-    " Shortcut to rapidly toggle `set list`
-    nmap <leader>ll :set list!<CR>
+	" tab is connected to C-i; so it over-rides default C-i 
+	"nnoremap <tab>  " tab is connected to C-i; so it over-rides default C-i%
+	"vnoremap <tab> %
+	nnoremap <leader>V V`]
 
-    if has("gui_running")
-        set guioptions-=m  "remove menu bar"
-        set guioptions-=T  "remove tool bar"
-        set guioptions+=LlRrb  "remove menu bar"
-        set guioptions-=LlRrb  "remove menu bar"
-        nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+	" quickly edit common files
+	"nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+	nnoremap <leader>ev <C-w><C-v><C-l>:e $HOME/.vimrc<cr>
+	nnoremap <leader>et <C-w><C-v><C-l>:e $HOME/.vim/.vim_tips<cr>
 
-        set t_Co=256
-    endif
+	" quick c comments
+	inoremap <Leader><Leader>c           /**/<Left><Left>
+	inoremap <Leader><Leader>c<Space>    /*<Space><Space>*/<Left><Left><Left>
+	inoremap <Leader><Leader>c<CR>       /*<CR>*/<Esc>O
+	nnoremap <Leader><Leader>cO           O/**/<Left><Left>
+	nnoremap <Leader><Leader>cO<Space>    O/*<Space><Space>*/<Left><Left><Left>
+	nnoremap <Leader><Leader>cA           A<tab>/**/<Left><Left>
+	nnoremap <Leader><Leader>cA<Space>    A<tab>/*<Space><Space>*/<Left><Left><Left>
+
+	" Shortcut to rapidly toggle `set list`
+	nmap <leader>ll :set list!<CR>
+
+	if has("gui_running")
+		set guioptions-=m  "remove menu bar"
+		set guioptions-=T  "remove tool bar"
+		set guioptions+=LlRrb  "remove menu bar"
+		set guioptions-=LlRrb  "remove menu bar"
+		nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+
+		set t_Co=256
+	endif
 
 if version>=700
 
 	set cursorline                              " highlight current line
-    set list
-    set listchars=tab:▸\ ,eol:¬,nbsp:.,trail:.,extends:# 
+	set list
+	set listchars=tab:▸\ ,eol:¬,nbsp:.,trail:.,extends:# 
 
 	" Catch the transition to diff mode
 	au FilterWritePre * if &diff | exe 'noremap ]c ]cz.' | exe 'noremap [c [cz.' | endif
@@ -285,17 +284,17 @@ if version>=700
 	"endfunction
 
 
-    " Setting up the directories {
-        if version>=703
-            set undofile                                " so is persistent undo ...
-            "set undoreload=10000                        " maximum number lines to save for undo on a buffer reload
-            set undodir=$HOME/.vimundo//                " but not when they clog .
-        endif
-    " Moved to function at bottom of the file
+	" Setting up the directories {
+		if version>=703
+			set undofile                                " so is persistent undo ...
+			"set undoreload=10000                        " maximum number lines to save for undo on a buffer reload
+			set undodir=$HOME/.vimundo//                " but not when they clog .
+		endif
+	" Moved to function at bottom of the file
 
-        au BufWinLeave * silent! mkview             " make vim save view (state) (folds, cursor, etc)
-        au BufWinEnter * silent! loadview           " make vim load view (state) (folds, cursor, etc)
-    " }
+		au BufWinLeave * silent! mkview             " make vim save view (state) (folds, cursor, etc)
+		au BufWinEnter * silent! loadview           " make vim load view (state) (folds, cursor, etc)
+	" }
 
 	" Vim UI {
 		if version>=703
