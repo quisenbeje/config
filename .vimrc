@@ -27,7 +27,7 @@ set nocompatible " must be first line
 
 	syntax on                                           " syntax highlighting
 
-    set t_Co=256
+	set t_Co=256
 	set background=dark
 	"color molokai                                      " load a colorscheme
 	color molokai_jeq                                   " load a colorscheme
@@ -57,7 +57,7 @@ set nocompatible " must be first line
 	set linespace=0                                     " No extra spaces between rows
 	set undolevels=20                                   " maximum number of changes that can be undone
 
-"    set mat=2                                          " how many tenths of a second to blink when matching brackets
+	"set mat=2                                          " how many tenths of a second to blink when matching brackets
 	set incsearch                                       " find as you type search
 	"set hlsearch                                       " highlight search terms
 	set winminheight=0                                  " windows can be 0 line high
